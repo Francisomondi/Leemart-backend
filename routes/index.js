@@ -6,6 +6,7 @@ const userDetailsController = require('../controller/userDetails')
 const authToken = require('../middleware/authToken')
 const userSignOut = require('../controller/userSignOut')
 const AllUsers = require('../controller/allUsers')
+const updateUser = require('../controller/updateUser')
 
 const router = express.Router()
 
@@ -19,6 +20,7 @@ router.get('/signout', userSignOut)
 
 //admin apnel
 router.get('/all-users',authToken,AllUsers)
+router.post('/update-user',authToken,updateUser)
 
 
 module.exports = router
