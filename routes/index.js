@@ -9,6 +9,7 @@ const AllUsers = require('../controller/allUsers')
 const updateUser = require('../controller/updateUser')
 const UploadProductController = require('../controller/uploadProduct')
 const getProductController = require('../controller/getProduct')
+const updateProductController = require('../controller/updateProduct')
 
 const router = express.Router()
 
@@ -27,6 +28,8 @@ router.post('/update-user',authToken,updateUser)
 //add products route
 router.post('/upload-product', authToken, UploadProductController)
 router.get('/get-product', getProductController)
+router.post('/update-product',authToken,updateProductController)
+
 
 
 module.exports = router
