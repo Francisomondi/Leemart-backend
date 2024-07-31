@@ -5,7 +5,7 @@ async function authToken(req, res, next) {
         const token = req.cookies?.token || req.headers['authorization'];
         if (!token) {
             return res.status(200).json({
-                message: 'User not logged in ',
+                message: 'Please log in...',
                 success: false,
                 error: true
             })
