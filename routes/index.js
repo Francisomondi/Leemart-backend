@@ -19,6 +19,7 @@ const viewProductAddToCart = require('../controller/user/viewProductAddToCart')
 const updateProductAddToCart = require('../controller/user/updateProductAddToCart')
 const deleteProductAddToCart = require('../controller/user/deleteProductAddToCart')
 const searchProduct = require('../controller/product/SearchProduct')
+const filterProductsContrller = require('../controller/product/filterProducts')
 
 
 
@@ -45,6 +46,7 @@ router.get('/getProductCategory', getProductCategory)
 router.post('/category-products', getCategoryProducts)
 router.post('/product-details', getProductDetails)
 router.get('/search-product', searchProduct)
+router.post('/filter-product', filterProductsContrller)
 
 
 //add to cart
