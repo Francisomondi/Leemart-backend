@@ -1,9 +1,9 @@
 const productModel = require("../../models/productModel")
 
-const searchProduct = async(req,res)=>{
+const searchProducts = async(req,res)=>{
     try {
         const query = req.query.q
-        const regex = RegExp(query,'i','g')
+        const regex = new RegExp(query,'i','g')
         const product = await productModel.find({
             '$or': [
                 {
@@ -30,4 +30,4 @@ const searchProduct = async(req,res)=>{
         })
     }
 }
-module.exports = searchProduct
+module.exports = searchProducts
