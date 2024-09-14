@@ -21,6 +21,8 @@ const deleteProductAddToCart = require('../controller/user/deleteProductAddToCar
 const searchProduct = require('../controller/product/searchProducts')
 const filterProductsContrller = require('../controller/product/filterProducts')
 
+const createToken = require('../controller/payments/token')
+
 
 
 
@@ -56,7 +58,8 @@ router.get('/viewcartproduct', authToken, viewProductAddToCart)
 router.post('/updatecartproduct', authToken, updateProductAddToCart)
 router.post('/deletecartproduct', authToken, deleteProductAddToCart)
 
-
+//payment access token
+router.get('/token', createToken)
 
 
 
