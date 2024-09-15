@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 require('dotenv').config();
 const connectDb = require('./config/db');
 const router = require('./routes');
+const stkController = require('./controller/payments/stk');
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use(express.json());
 
 // Router
 app.use('/api', router);
+
+//app.post('/stk', stkController)
 
 // Define the port
 const PORT = process.env.PORT || 8000;
