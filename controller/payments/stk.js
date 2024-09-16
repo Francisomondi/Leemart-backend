@@ -1,55 +1,68 @@
 const axios = require("axios");
 const moment = require("moment");
+const getAccessToken = require("./token");
 
-
-const stkController = async(req,res)=>{
+const stkController = async (req, res, next) => {
+  try {
     const url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
-  const phone = req.body.phone.substring(1)
-  const amount = req.body.amount
- //console.log({phone, amount})
+    const phone = req.body.phone.substring(1);
+    const amount = req.body.amount;
+    console.log({ phone, amount });
 
- const timestamp = moment().format("YYYYMMDDHHmmss");
-      
+    const timestamp = moment().format("YYYYMMDDHHmmss");
 
-  const shortcode = process.env.BUSINESS_SHORT_CODE
-  const passkey = process.env.PASS_KEY
+    const shortcode = process.env.BUSINESS_SHORT_CODE;
+    const passkey = process.env.PASS_KEY;
+    const consumer_key = process.env.CONSUMER_KEY; // Make sure this is defined
+    const consumer_secret = process.env.CONSUMER_SECRET; // Make sure this is defined
 
-  const password = new Buffer.from(
-    shortcode +
-    passkey +
-    timestamp
-  ).toString("base64");
 
- axios
- .post(
-   url,
-   {
-     BusinessShortCode: shortcode ,
-     Password: password,
-     Timestamp: timestamp,
-     TransactionType: "CustomerBuyGoodsOnline",
-     Amount: amount,
-     PartyA: `254${phone}`,
-     PartyB: shortcode,
-     PhoneNumber: `254${phone}`,
-     CallBackURL: "https://mydomain.com/path",
-     AccountReference: `254${phone}`,
-     TransactionDesc: "Mpesa Daraja API stk push test",
-   },
-   {
-     headers: {
-       Authorization: auth,
-     },
-   }
- ).then((response)=>{
-  console.log(response.data)
-  res.status(200).json(data);
- }).catch(error=>{
-  console.log(error.message)
-  res.status(400).json(error.message)
- })
+    const password = Buffer.from(shortcode + passkey + timestamp).toString(
+      "base64"
+    );
 
-  res.json({phone, amount})
-}
+    const accessToken = await getAccessToken();
+    //console.log("Access Token:", accessToken); 
 
-module.exports = stkController
+    const response = await axios.post(
+      url,
+      {
+        BusinessShortCode: shortcode,
+        Password: password,
+        Timestamp: timestamp,
+        TransactionType: "CustomerBuyGoodsOnline",
+        Amount: amount,
+        PartyA: `254${phone}`,
+        PartyB: shortcode,
+        PhoneNumber: `254${phone}`,
+        CallBackURL: "https://mydomain.com/pat", // Replace with your callback URL
+        AccountReference: `254${phone}`,
+        TransactionDesc: "Mpesa Daraja API stk push test",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`, // Use the access token here
+        },
+      }
+    );
+
+    // Return a success response
+    res.status(200).json({
+      success: true,
+      message: "STK Push request sent successfully",
+      data: response.data
+    });
+
+  } catch (error) {
+    console.error("STK Push error: ", error);
+
+    // Handle the error and send response
+    res.status(500).json({
+      success: false,
+      message: "Failed to send STK Push request", 
+      error: error.message,
+    });
+  }
+};
+
+module.exports = stkController;

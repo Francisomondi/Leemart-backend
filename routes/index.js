@@ -61,7 +61,7 @@ router.post('/deletecartproduct', authToken, deleteProductAddToCart)
 
 //payment access token
 router.get('/token', createToken)
-router.post('/stk', createToken, stkController)
+router.post('/stk', stkController)
 
 
 
