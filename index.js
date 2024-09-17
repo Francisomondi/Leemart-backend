@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser')
 require('dotenv').config();
 const connectDb = require('./config/db');
 const router = require('./routes');
-const stkController = require('./controller/payments/stk');
+
 
 const app = express();
 

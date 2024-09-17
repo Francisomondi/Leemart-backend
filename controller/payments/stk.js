@@ -2,21 +2,16 @@ const axios = require("axios");
 const moment = require("moment");
 const getAccessToken = require("./token");
 
-const stkController = async (req, res, next) => {
+const stkController = async (req, res) => {
   try {
     const url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
     const phone = req.body.phone.substring(1);
     const amount = req.body.amount;
-    console.log({ phone, amount });
+    console.log({ phone, amount }); u7 
 
     const timestamp = moment().format("YYYYMMDDHHmmss");
-
     const shortcode = process.env.BUSINESS_SHORT_CODE;
     const passkey = process.env.PASS_KEY;
-    const consumer_key = process.env.CONSUMER_KEY; // Make sure this is defined
-    const consumer_secret = process.env.CONSUMER_SECRET; // Make sure this is defined
-
-
     const password = Buffer.from(shortcode + passkey + timestamp).toString(
       "base64"
     );
