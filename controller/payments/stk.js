@@ -7,7 +7,7 @@ const stkController = async (req, res) => {
     const url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
     const phone = req.body.phone.substring(1);
     const amount = req.body.amount;
-    console.log({ phone, amount }); u7 
+    console.log({ phone, amount }); 
 
     const timestamp = moment().format("YYYYMMDDHHmmss");
     const shortcode = process.env.BUSINESS_SHORT_CODE;
@@ -19,6 +19,7 @@ const stkController = async (req, res) => {
     const accessToken = await getAccessToken();
     //console.log("Access Token:", accessToken); 
 
+   
     const response = await axios.post(
       url,
       {
@@ -49,7 +50,7 @@ const stkController = async (req, res) => {
     });
 
   } catch (error) {
-    console.error("STK Push error: ", error);
+    console.error("STK Push error: ", error.message);
 
     // Handle the error and send response
     res.status(500).json({

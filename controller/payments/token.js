@@ -20,7 +20,7 @@ const getAccessToken = async (req,res,next) => {
     const accessToken = responseData.access_token; // The access token
     console.log('Access Token:', accessToken);
     return accessToken;
-
+    
   } catch (error) {
     console.error('Error generating access token:', error.response ? error.response.data : error.message);
   }
