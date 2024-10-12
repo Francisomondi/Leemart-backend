@@ -2,6 +2,7 @@ const axios = require("axios");
 const moment = require("moment");
 const getAccessToken = require("./token");
 
+
 const stkController = async (req, res) => {
   try {
     const url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
@@ -31,7 +32,7 @@ const stkController = async (req, res) => {
         PartyA: `254${phone}`,
         PartyB: shortcode,
         PhoneNumber: `254${phone}`,
-        CallBackURL: "https://mydomain.com/pat", // Replace with your callback URL
+        CallBackURL: "https://cbbc-41-90-179-238.ngrok-free.app/callback", // Replace with your callback URL
         AccountReference: `254${phone}`,
         TransactionDesc: "Mpesa Daraja API stk push test",
       },
@@ -59,6 +60,7 @@ const stkController = async (req, res) => {
       error: error.message,
     });
   }
+  
 };
 
 module.exports = stkController;

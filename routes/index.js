@@ -23,6 +23,7 @@ const filterProductsContrller = require('../controller/product/filterProducts')
 
 const createToken = require('../controller/payments/token')
 const stkController = require('../controller/payments/stk')
+const callbackHandler = require('../controller/payments/callbackHandler')
 
 
 
@@ -62,12 +63,6 @@ router.post('/deletecartproduct', authToken, deleteProductAddToCart)
 //payment access token
 router.get('/token', createToken)
 router.post('/stk', stkController)
-
-
-
-
-
-
 
 
 module.exports = router

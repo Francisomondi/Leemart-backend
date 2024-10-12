@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 require('dotenv').config();
 const connectDb = require('./config/db');
 const router = require('./routes');
+const callbackHandler = require('./controller/payments/callbackHandler');
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use(express.json());
 
 // Router
 app.use('/api', router);
+app.post('/callback', callbackHandler); 
 
 
 // Define the port
