@@ -1,13 +1,13 @@
 const callbackHandler = (req, res) => {
     const callbackData = req.body; // M-Pesa will send the data here
-    console.log(callbackData);
+    console.log(callbackData.Body);
+
+    if (!callbackData.Body.stkCallback.CallbackMetadata) {
+      console.log(callbackData.Body)
+      res.json('ok')
+    }
   
-    // Process the callback data as needed
-    res.status(200).json({
-      success: true,
-      message: "Callback received successfully"
-     
-    });
+    console.log(callbackData.Body.stkCallback.CallbackMetadata)
   };
 
   module.exports =  callbackHandler 

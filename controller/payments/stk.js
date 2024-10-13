@@ -8,7 +8,7 @@ const stkController = async (req, res) => {
     const url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest";
     const phone = req.body.phone.substring(1);
     const amount = req.body.amount;
-    console.log({ phone, amount }); 
+    //console.log({ phone, amount }); 
 
     const timestamp = moment().format("YYYYMMDDHHmmss");
     const shortcode = process.env.BUSINESS_SHORT_CODE;
@@ -27,12 +27,12 @@ const stkController = async (req, res) => {
         BusinessShortCode: shortcode,
         Password: password,
         Timestamp: timestamp,
-        TransactionType: "CustomerBuyGoodsOnline",
+        TransactionType: "CustomerPayBillOnline", 
         Amount: amount,
         PartyA: `254${phone}`,
         PartyB: shortcode,
         PhoneNumber: `254${phone}`,
-        CallBackURL: "https://cbbc-41-90-179-238.ngrok-free.app/callback", // Replace with your callback URL
+        CallBackURL: "https://e417-41-90-190-70.ngrok-free.app/callback", // Replace with your callback URL
         AccountReference: `254${phone}`,
         TransactionDesc: "Mpesa Daraja API stk push test",
       },
