@@ -32,7 +32,7 @@ const stkController = async (req, res) => {
         PartyA: `254${phone}`,
         PartyB: shortcode,
         PhoneNumber: `254${phone}`,
-        CallBackURL: "https://e417-41-90-190-70.ngrok-free.app/callback", // Replace with your callback URL
+        CallBackURL: "https://5119-196-207-173-148.ngrok-free.app/callback", // Replace with your callback URL
         AccountReference: `254${phone}`,
         TransactionDesc: "Mpesa Daraja API stk push test",
       },
