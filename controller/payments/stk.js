@@ -20,18 +20,18 @@ const stkController = async (req, res) => {
     const accessToken = await getAccessToken();
     //console.log("Access Token:", accessToken); 
 
-   requestBody =   {
-    BusinessShortCode: shortcode,
-    Password: password,
-    Timestamp: timestamp,
-    TransactionType: "CustomerPayBillOnline", 
-    Amount: amount,
-    PartyA: `254${phone}`,
-    PartyB: shortcode,
-    PhoneNumber: `254${phone}`,
-    CallBackURL: "https://c878-196-207-173-148.ngrok-free.app/callback", // Replace with your callback URL
-    AccountReference: `254${phone}`,
-    TransactionDesc: "Mpesa Daraja API stk push test",
+   requestBody = {
+        BusinessShortCode: shortcode,
+        Password: password,
+        Timestamp: timestamp,
+        TransactionType: "CustomerPayBillOnline", 
+        Amount: amount,
+        PartyA: `254${phone}`,
+        PartyB: shortcode,
+        PhoneNumber: `254${phone}`,
+        CallBackURL: "https://66b8-41-90-187-95.ngrok-free.app/callback", // callback URL
+        AccountReference: `254${phone}`,
+        TransactionDesc: "Mpesa Daraja API stk push test",
   }
 
   //stk response
