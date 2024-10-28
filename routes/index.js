@@ -24,6 +24,7 @@ const filterProductsContrller = require('../controller/product/filterProducts')
 const createToken = require('../controller/payments/token')
 const stkController = require('../controller/payments/stk')
 const callbackHandler = require('../controller/payments/callbackHandler')
+const paymentController = require('../controller/payments/stripe/paymentContoller')
 
 
 
@@ -64,6 +65,9 @@ router.post('/deletecartproduct', authToken, deleteProductAddToCart)
 router.get('/token', createToken)
 router.post('/stk', stkController)
 
+
+//stripe payment 
+router.post('/checkout',authToken, paymentController)
 
 module.exports = router
 
