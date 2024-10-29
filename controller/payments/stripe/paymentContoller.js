@@ -5,11 +5,8 @@ const paymentController = async (req,res) =>{
     try {
         const {cardItems} = req.body
 
-        console.log('cartItems', cardItems)
-
         const user = await userModel.findOne({_id: req.userId})
-
-
+        
         const params = {
           submit_type : 'pay',
           mode : 'payment',
@@ -26,11 +23,23 @@ const paymentController = async (req,res) =>{
                 price_data: {
                     currency: 'KES',
                     product_data: {
-                        
-                    }
-                }
+                       name: item.productId.productName,
+                       images: item.productId.productImage,
+                       metadata: {
+                        productId: item.productId._id
+                       } 
+                    },
+                    unit_amount: item.productId.sellingPrice
+                },
+                adjustable_quantity: {
+                    enabled: true,
+                    minimum: 1
+                },
+                quantity: item.quantity
             } 
-           })
+           }),
+           success_url: `${process.env.FRONTEND_URL}/success`,
+           cancel_url: `${process.env.FRONTEND_URL}/cancel`
         }
         const session = await stripe.checkout.sessions.create(params)
         res.status(303).json(session)
