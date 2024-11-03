@@ -41,6 +41,8 @@ const paymentController = async (req,res) =>{
            success_url: `${process.env.FRONTEND_URL}/success`,
            cancel_url: `${process.env.FRONTEND_URL}/cancel`
         }
+
+        
         const session = await stripe.checkout.sessions.create(params)
         res.status(303).json(session)
 

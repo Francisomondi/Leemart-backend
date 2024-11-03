@@ -25,6 +25,7 @@ const createToken = require('../controller/payments/token')
 const stkController = require('../controller/payments/stk')
 const callbackHandler = require('../controller/payments/callbackHandler')
 const paymentController = require('../controller/payments/stripe/paymentContoller')
+const webhook = require('../controller/payments/stripe/webhooks')
 
 
 
@@ -68,6 +69,8 @@ router.post('/stk', stkController)
 
 //stripe payment 
 router.post('/checkout',authToken, paymentController)
+router.post('/webhook', webhook)
+
 
 module.exports = router
 
