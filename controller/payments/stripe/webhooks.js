@@ -1,4 +1,5 @@
-const stripe = require('../../payments/stripe')
+
+const stripe = require('../../../config/stripe'); 
 const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET;
 
 const webhook = (req,res) =>{
